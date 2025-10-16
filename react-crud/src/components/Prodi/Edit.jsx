@@ -7,7 +7,7 @@ export default function Edit() {
     const navigate = useNavigate(); //Menggunakan useNavigate untuk navigasi setelah proses selesai
     const [nama, setNama] = useState(""); //Menginisialisasi state 'nama' untuk menyimpan nama prodi
     const [fakultas, setFakultas] = useState("")
-    const [listFakultas, setFakultasList] = useState([])
+    const [fakultasList, setFakultasList] = useState([])
     const [error, setError] = useState(null); //Menginisialisasi state 'error' untuk menyimpan pesan error jika ada
     
     //Mengambil data prodi berdasarkan id ketika komponen pertama kali di muat
@@ -24,7 +24,7 @@ export default function Edit() {
         })
 
         axios
-        .get(`https://project-apiif-3-b.vercel.app/api/api/fakultas/${id}`) //Mengirimkan request GET untuk mendapatkan data prodi berdasarkan id
+        .get(`https://project-apiif-3-b.vercel.app/api/api/fakultas`) //Mengirimkan request GET untuk mendapatkan data prodi berdasarkan id
         .then( (response) => {
             setFakultasList(response.data.result)
         })
@@ -80,7 +80,7 @@ export default function Edit() {
                     required
                     >
                         <option value="">Pilih Fakultas</option>
-                        {listFakultas.map(
+                        {fakultasList.map(
                             (fakultas) => (
                                 <option key={fakultas.id} value={fakultas.id}>
                                     {fakultas.nama}
