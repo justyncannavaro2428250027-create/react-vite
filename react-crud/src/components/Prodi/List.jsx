@@ -21,14 +21,23 @@ export default function List(){
         <div>
         <h2>List Prodi</h2>
 
-        <NavLink to='create' className="btn btn-primary wb-3">
-            Create
-        </NavLink> 
-        <ul>
+        <NavLink to='create' className="btn btn-primary wb-3">Create</NavLink> 
+        <table className="table table-striped">
+            <thead>
+            <tr>
+                <th>Nama Prodi</th>
+                <th>Fakultas</th>
+            </tr>
+        </thead>
+        <tbody>
             {prodi.map( (data) => (
-                <li>{data.nama}</li>
+                <tr key={data.id}>
+                    <td>{data.nama}</td>
+                    <td></td>
+                </tr>
             ))}
-        </ul>
+        </tbody>
+        </table>
         </div>
         
     )
