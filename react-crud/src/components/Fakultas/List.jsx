@@ -47,7 +47,7 @@ export default function List(){
             });
         }
     })
-    )
+)
     return (
         <div>
         <h2>List Fakultas</h2>
