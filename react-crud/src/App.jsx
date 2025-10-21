@@ -1,5 +1,7 @@
 import React, {Suspense} from "react"
 import {BrowserRouter as Router, Route, Routes, NavLink} from "react-router-dom"
+import ProtectedRoute from "./components/ProtectedRoute"
+import Logout from "./components/Logout"
 
 const Home = React.lazy( ()=> import('./components/Home'))
 const FakultasList = React.lazy( ()=> import('./components/Fakultas/List'))
@@ -8,6 +10,7 @@ const FakultasEdit = React.lazy( ()=> import('./components/Fakultas/Edit'))
 const ProdiCreate = React.lazy( ()=> import('./components/Prodi/Create'))
 const ProdiList = React.lazy( ()=> import('./components/Prodi/List'))
 const ProdiEdit = React.lazy( ()=> import('./components/Prodi/Edit')) 
+const Login = React.lazy(() => import("./components/Login"));
 
 function App() {
 
@@ -29,20 +32,24 @@ function App() {
         </li>
             <li class="nav-item">
           <NavLink className="nav-link" to="prodi">Prodi</NavLink>
+          
         </li>
       </ul>
+      
     </div>
   </div>
 </nav>
       <Suspense fallback ={<div>Loading.....</div>}>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='fakultas' element={<FakultasList/>}/>
-        <Route path='fakultas/create' element={<FakultasCreate/>}/>
-        <Route path='fakultas/edit/:id' element={<FakultasEdit/>}/>
-        <Route path='prodi' element={<ProdiList/>}/>
-        <Route path='prodi/create' element={<ProdiCreate/>}/>
-        <Route path='prodi/edit/:id' element={<ProdiEdit/>}/>
+        <Route path='fakultas' element={<ProtectedRoute><FakultasList/></ProtectedRoute>}/>
+        <Route path='fakultas/create' element={<ProtectedRoute><FakultasCreate/></ProtectedRoute>}/>
+        <Route path='fakultas/edit/:id' element={<ProtectedRoute><FakultasEdit/></ProtectedRoute>}/>
+        <Route path='prodi' element={<ProtectedRoute><ProdiList/></ProtectedRoute>}/>
+        <Route path='prodi/create' element={<ProtectedRoute><ProdiCreate/></ProtectedRoute>}/>
+        <Route path='prodi/edit/:id' element={<ProtectedRoute><ProdiEdit/></ProtectedRoute>}/>
+        <Route path='login' element={<Login/>}/>
+        <Route path="/logout" element={<Logout />} />
         </Routes>
       </Suspense>
     </Router>
